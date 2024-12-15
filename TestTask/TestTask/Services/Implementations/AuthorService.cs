@@ -13,7 +13,6 @@ public class AuthorService(ApplicationDbContext context) : IAuthorService
                 .Include(a => a.Books)
                 .Where(a => a.Books.Any())
                 .OrderByDescending(a => a.Books
-                    .OrderByDescending(b => b.Title.Length)
                     .Max(b => b.Title.Length))
                 .ThenBy(a => a.Id)
                 .Select(a => new Author()
